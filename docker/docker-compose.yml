@@ -1,0 +1,84 @@
+version: '3.9'
+services:
+  nifi:
+    hostname: nifi
+    container_name: nifi_container
+    build:
+      #path to docker files folder
+      context: ./docker_files/nifi
+      #docker file name for jupyter in docker files folder
+      dockerfile: dockerfile_nifi
+    volumes:
+      - ./file_share/nifi_data/:/opt/nifi/nifi-current/ls-target apache/nifi
+    environment:
+      NIFI_WEB_HTTP_PORT: '8080'
+      NIFI_WEB_HTTPS_PORT: '8443'
+      NIFI_JVM_HEAP_INIT: '512'
+    ports:
+      - '8080:8080/tcp' # HTTP interface
+      - '8443:8443/tcp' # HTTPS interface
+    networks:
+      - nifi
+
+  jupyter:
+    hostname: jupyter
+    container_name: jupyter_container
+    build:
+      #path to docker files folder
+      context: ./docker_files/jupyter
+      #docker file name for jupyter in docker files folder
+      dockerfile: dockerfile_jupyter
+    volumes:
+      #path to file share
+      - ./file_share/jupyter_data/:/home/jovyan/
+    ports:
+      - '8888:8888'
+    networks:
+      - nifi
+
+  #DWH postgresSQL
+  postgres:
+    hostname: dwh_postgres
+    container_name: dwh_postgres_container
+    build:
+      #path to docker files folder
+      context: ./docker_files/dwh_postgresql
+      #docker file name for dwh in docker files folder
+      dockerfile: dockerfile_dwh_postgresql
+    volumes:
+      #path to file share
+      - ./file_share/dwh_postgresql_data/:/var/lib/postgresql/data
+    #set the DB name, user and password
+    environment:
+      POSTGRES_DB: 'dwh_postgres_db'
+      POSTGRES_USER: 'dwh_postgres'
+      POSTGRES_PASSWORD: 'dwh_postgres'
+    ports:
+        - '5432:5432'
+    networks:
+      - nifi
+
+  #pgadmin
+  pgadmin:
+    hostname: pgadmin
+    container_name: pgadmin_container
+    build:
+      #path to docker files folder
+      context: ./docker_files/pgadmin
+      #docker file name for pgadmin in docker files folder
+      dockerfile: dockerfile_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin@default.com"
+      PGADMIN_DEFAULT_PASSWORD: "pgadminpswrd"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    #path to file share
+    volumes:
+      - ./file_share/pgadmin_data/:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - nifi
+
+networks:
+  nifi:
+    driver: bridge
