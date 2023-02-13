@@ -11,11 +11,9 @@ services:
     volumes:
       - ./file_share/nifi_data/:/opt/nifi/nifi-current/ls-target apache/nifi
     environment:
-      NIFI_WEB_HTTP_PORT: '8080'
       NIFI_WEB_HTTPS_PORT: '8443'
       NIFI_JVM_HEAP_INIT: '512'
     ports:
-      - '8080:8080/tcp' # HTTP interface
       - '8443:8443/tcp' # HTTPS interface
     networks:
       - nifi
@@ -75,7 +73,7 @@ services:
     volumes:
       - ./file_share/pgadmin_data/:/var/lib/pgadmin
     ports:
-      - "5050:80"
+      - '5050:80'
     networks:
       - nifi
 
