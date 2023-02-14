@@ -10,5 +10,11 @@
 #DWH postgresql data
 /docker/file_share/dwh_postgresql_data
 
+#nifi data
+/docker/file_share/nifi
+
+#nifi registry data
+/docker/file_share/nifi_registry
+
 #pgadmin data
 /docker/file_share/pgadmin_data
