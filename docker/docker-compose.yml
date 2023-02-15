@@ -35,7 +35,7 @@ services:
     nifi:
         hostname: nifi
         container_name: nifi_container
-        image: 'apache/nifi:1.14.0'
+        image: 'apache/nifi:1.19.0'
         # to see crashes when debugging
         # restart: on-failure
         ports:
