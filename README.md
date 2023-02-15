@@ -7,3 +7,5 @@ after login you should add new DB
 
 # nifi
 run on host http://localhost:8091/nifi/
+
+test 123
