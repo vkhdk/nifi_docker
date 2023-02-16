@@ -11,7 +11,12 @@
 /docker/file_share/dwh_postgresql_data
 
 #nifi data
-/docker/file_share/nifi
+/docker/file_share/nifi/content_repository
+/docker/file_share/nifi/database_repository
+/docker/file_share/nifi/flowfile_repository
+/docker/file_share/nifi/logs
+/docker/file_share/nifi/provenance_repository
+/docker/file_share/nifi/state
 
 #nifi registry data
 /docker/file_share/nifi_registry

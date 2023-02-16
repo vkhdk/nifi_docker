@@ -60,8 +60,10 @@ services:
             - ./file_share/nifi/provenance_repository:/opt/nifi/nifi-current/provenance_repository
             - ./file_share/nifi/state:/opt/nifi/nifi-current/state
             - ./file_share/nifi/logs:/opt/nifi/nifi-current/logs
+            # folder for drivers
+            - ./file_share/nifi/drivers:/opt/nifi/nifi-current/drivers
             # uncomment the next line after copying the /conf directory from the container to your local directory to persist NiFi flows
-            #- ./nifi/conf:/opt/nifi/nifi-current/conf
+            #- ./file_share/nifi/conf:/opt/nifi/nifi-current/conf
         networks:
             - nifi
     # python IDE in container
