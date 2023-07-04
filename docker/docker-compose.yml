@@ -10,7 +10,7 @@ services:
         environment:
             - ALLOW_ANONYMOUS_LOGIN=yes
         networks:
-            - nifi
+            - zoocluster
     # version control for nifi flows
     registry:
         hostname: myregistry
@@ -29,7 +29,7 @@ services:
             - ./file_share/nifi_registry/database:/opt/nifi-registry/nifi-registry-current/database
             - ./file_share/nifi_registry/flow_storage:/opt/nifi-registry/nifi-registry-current/flow_storage
         networks:
-            - nifi
+            - zoocluster
 
     # data extraction, transformation and load service
     nifi:
@@ -66,7 +66,7 @@ services:
             # uncomment the next line after copying the /conf directory from the container to your local directory to persist NiFi flows
             #- ./file_share/nifi/conf:/opt/nifi/nifi-current/conf
         networks:
-            - nifi
+            - zoocluster
     # python IDE in container
     jupyter:
         hostname: jupyter
@@ -82,7 +82,7 @@ services:
         ports:
             - '8888:8888'
         networks:
-            - nifi
+            - zoocluster
 
     # DWH postgresSQL
     postgres:
@@ -104,7 +104,7 @@ services:
         ports:
             - '5432:5432'
         networks:
-            - nifi
+            - zoocluster
 
     # pgadmin
     pgadmin:
@@ -125,8 +125,8 @@ services:
         ports:
             - '5050:80'
         networks:
-            - nifi
+            - zoocluster
 
 networks:
-  nifi:
+  zoocluster:
     driver: bridge
