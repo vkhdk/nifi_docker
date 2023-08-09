@@ -61,6 +61,8 @@ services:
             - ./file_share/nifi/provenance_repository:/opt/nifi/nifi-current/provenance_repository
             - ./file_share/nifi/state:/opt/nifi/nifi-current/state
             - ./file_share/nifi/logs:/opt/nifi/nifi-current/logs
+            # folder for external files Location 
+            - ./file_share/nifi/external_files:/opt/nifi/nifi-current/external_files
             # folder for Driver Location 
             - ./file_share/nifi/drivers:/opt/nifi/nifi-current/drivers
             # uncomment the next line after copying the /conf directory from the container to your local directory to persist NiFi flows
